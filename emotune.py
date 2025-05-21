@@ -1,10 +1,8 @@
-# 1. Imports
 import cv2
 from deepface import DeepFace
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
-# 2. Emotion Detection
 def detect_emotion():
     cam = cv2.VideoCapture(0)
     print("Detecting Emotion. Look at the camera...")
@@ -21,7 +19,6 @@ def detect_emotion():
     cv2.destroyAllWindows()
     return emotion
 
-# 3. Spotify Setup
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     client_id="b01ca3c10234419baf6e4dbdfcccf324",
     client_secret="4033297a0dbf43ef8bf81c495c9584d1",
@@ -43,18 +40,13 @@ import webbrowser
 def play_spotify_music(emotion):
     playlist_uri = emotion_to_playlist_uri.get(emotion)
     if playlist_uri:
-        # Extract playlist ID from the URI
         playlist_id = playlist_uri.split(":")[-1]
-        # Create a browser-friendly URL
         playlist_url = f"https://open.spotify.com/playlist/{playlist_id}"
-        # Open it in the default web browser
         webbrowser.open(playlist_url)
         print(f"Opened playlist for emotion '{emotion}' in your browser.")
     else:
         print(f"No playlist found for emotion: {emotion}")
 
-
-# 4. Light Simulation
 def simulate_light_color(emotion):
     color_map = {
         "happy": "🟨 Yellow - Uplifting",
@@ -65,8 +57,7 @@ def simulate_light_color(emotion):
         "fear": "🟢 Green - Reassuring"
     }
     print(f"Light color set to: {color_map.get(emotion, '⚪ White')}")
-
-# 5. Main Block — PUT THIS LAST
+    
 if __name__ == "__main__":
     emotion = detect_emotion()
     simulate_light_color(emotion)
